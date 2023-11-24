@@ -63,10 +63,10 @@ describe("Submitting a correct hexcode adds that color to the color array and re
 		fireEvent.change(inputField, { target: { value: validHexColor } })
 		fireEvent.submit(screen.getByTestId("add-color-component"))
 
-		const colorBox = screen.getByTestId(`color-box-My Color 1`)
+		const colorBox = screen.getByTestId("color-box-My Color 1")
 		const colorId = screen.getByText("My Color 1")
 
 		expect(colorId).toBeInTheDocument()
-		expect(colorBox).toHaveStyle({ backgroundColor: `#${validHexColor}` })
+		expect(colorBox).toHaveStyle(`background-color: #${validHexColor}`)
 	})
 })
