@@ -1,7 +1,7 @@
 # Welcome to Mood-Color 
 
 ## In this app we created a single page app that handles colors
-- In this app we are using npx create-react-app 
+- In this app we are using create-react-app 
 
 
 ## Get started 
@@ -15,7 +15,7 @@ Clone down the repo
 run the tests once:
 
 ```bash
-npm run test
+npm test
 ```
 
 ## Components
@@ -29,9 +29,10 @@ npm run test
 
 
  - A header that have the app name 
- 
+
 
  - On the main we have 5 colors listed from ListItem 
+    - Colors are mapped from an a array 
     - You can see the color and the name of the colors 
 
  
