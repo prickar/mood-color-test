@@ -29,13 +29,16 @@ npm run test
 
 
  - A header that have the app name 
+ 
 
  - On the main we have 5 colors listed from ListItem 
-  - You can see the color and the name of the colors 
+    - You can see the color and the name of the colors 
+
  
  - Input to add more colors to the list from AddColor
-  -  You can only add colors with a correct Hex value 
-  - If you put in a Hex value that doesnt exist a errorMessage will show up
+    -  You can only add colors with a correct Hex value 
+    - If you put in a Hex value that doesnt exist a errorMessage will show up
+
 
 - Ending the page with a footer
  
