@@ -11,22 +11,22 @@ describe("A button and an input field are rendered.", function () {
 
 	test("input field is rendered", () => {
 		render(<AddColor />)
-		const inputField = screen.getByTestId("color-input")
+		const inputField = screen.getByRole("textbox")
 
 		expect(inputField).toBeInTheDocument()
 	})
 })
 
-describe("Incorrect hexcodes renders an error message containing the input.", function () {
+describe("Incorrect hexcodes render an error message containing the input.", function () {
 	const onColorArrayChangeMock = jest.fn()
 
 	test("valid submitted hexcode does not render an error message", () => {
 		render(<AddColor onColorArrayChange={onColorArrayChangeMock} />)
-		const inputField = screen.getByTestId("color-input")
+		const inputField = screen.getByRole("textbox")
 		const validHexColor = "1a2b3c"
 
 		fireEvent.change(inputField, { target: { value: validHexColor } })
-		fireEvent.submit(screen.getByTestId("add-color-component"))
+		fireEvent.submit(screen.getByRole("form"))
 
 		const message = screen.queryByTestId("error-message")
 		expect(onColorArrayChangeMock).toHaveBeenCalledTimes(1)
@@ -35,11 +35,11 @@ describe("Incorrect hexcodes renders an error message containing the input.", fu
 
 	test("submitted hexcode of wrong length does not update the array and shows the error message", () => {
 		render(<AddColor onColorArrayChange={onColorArrayChangeMock} />)
-		const inputField = screen.getByTestId("color-input")
+		const inputField = screen.getByRole("textbox")
 		const tooShortHexColor = "123"
 
 		fireEvent.change(inputField, { target: { value: tooShortHexColor } })
-		fireEvent.submit(screen.getByTestId("add-color-component"))
+		fireEvent.submit(screen.getByRole("form"))
 
 		const message = screen.queryByTestId("error-message")
 		expect(onColorArrayChangeMock).toHaveBeenCalledTimes(0)
@@ -48,11 +48,11 @@ describe("Incorrect hexcodes renders an error message containing the input.", fu
 
 	test("invalid submitted hexcode does not update the array and shows the error message", () => {
 		render(<AddColor onColorArrayChange={onColorArrayChangeMock} />)
-		const inputField = screen.getByTestId("color-input")
+		const inputField = screen.getByRole("textbox")
 		const invalidHexColor = "xxxxxx"
 
 		fireEvent.change(inputField, { target: { value: invalidHexColor } })
-		fireEvent.submit(screen.getByTestId("add-color-component"))
+		fireEvent.submit(screen.getByRole("form"))
 
 		const message = screen.queryByTestId("error-message")
 		expect(onColorArrayChangeMock).toHaveBeenCalledTimes(0)
@@ -65,11 +65,11 @@ describe("Not valid input renders an error message element with the input", func
 
 	test("valid submitted hexcode does not show the error message", () => {
 		render(<AddColor onColorArrayChange={onColorArrayChangeMock} />)
-		const inputField = screen.getByTestId("color-input")
+		const inputField = screen.getByRole("textbox")
 		const validHexColor = "1a2b3c"
 
 		fireEvent.change(inputField, { target: { value: validHexColor } })
-		fireEvent.submit(screen.getByTestId("add-color-component"))
+		fireEvent.submit(screen.getByRole("form"))
 
 		const message = screen.queryByTestId("error-message")
 		expect(message).not.toBeInTheDocument()
@@ -77,11 +77,11 @@ describe("Not valid input renders an error message element with the input", func
 
 	test("invalid submitted hexcode renders an error message", () => {
 		render(<AddColor onColorArrayChange={onColorArrayChangeMock} />)
-		const inputField = screen.getByTestId("color-input")
+		const inputField = screen.getByRole("textbox")
 		const invalidHexColor = "zzzzzz"
 
 		fireEvent.change(inputField, { target: { value: invalidHexColor } })
-		fireEvent.submit(screen.getByTestId("add-color-component"))
+		fireEvent.submit(screen.getByRole("form"))
 
 		const message = screen.queryByTestId("error-message")
 		expect(message).toBeInTheDocument()
@@ -89,11 +89,11 @@ describe("Not valid input renders an error message element with the input", func
 
 	test("that error message text contains the input", () => {
 		render(<AddColor onColorArrayChange={onColorArrayChangeMock} />)
-		const inputField = screen.getByTestId("color-input")
+		const inputField = screen.getByRole("textbox")
 		const invalidHexColor = "yyyyyy"
 
 		fireEvent.change(inputField, { target: { value: invalidHexColor } })
-		fireEvent.submit(screen.getByTestId("add-color-component"))
+		fireEvent.submit(screen.getByRole("form"))
 
 		const message = screen.queryByTestId("error-message")
 		expect(message).toHaveTextContent(invalidHexColor)

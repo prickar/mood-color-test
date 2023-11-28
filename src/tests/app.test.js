@@ -17,7 +17,7 @@ describe("Renders all components, Header, ListItems, AddColor and Footer.", func
 
 	test("renders AddColor component", () => {
 		render(<App />)
-		const addColorComponent = screen.getByTestId("add-color-component")
+		const addColorComponent = screen.getByRole("form")
 		expect(addColorComponent).toBeInTheDocument()
 	})
 
@@ -28,40 +28,46 @@ describe("Renders all components, Header, ListItems, AddColor and Footer.", func
 	})
 })
 
-describe("Submitting a correct hexcode adds that color to the color array and renders that color.", () => {
-	const onColorArrayChangeMock = jest.fn()
+describe("Submitting a correct hexcode adds that color to the color array and renders that color, invalid hexcode shows error message.", () => {
+	// const onColorArrayChangeMock = jest.fn()
 
-	test("invalid submitted hexcode does not add a color to the color array", () => {
-		render(<App onColorArrayChange={onColorArrayChangeMock} />)
-		const inputField = screen.getByTestId("color-input")
+	test("invalid submitted hexcode does not add a color to the color array and shows error message", () => {
+		render(<App />)
+		const inputField = screen.getByRole("textbox")
 		const invalidHexColor = "xxxxxx"
 
 		fireEvent.change(inputField, { target: { value: invalidHexColor } })
-		fireEvent.submit(screen.getByTestId("add-color-component"))
+		fireEvent.submit(screen.getByRole("form"))
 
 		const array = screen.queryAllByTestId("color-item")
 		expect(array).toHaveLength(Color.length)
+
+		const errorMessage = screen.queryByTestId("error-message")
+		expect(errorMessage).toBeInTheDocument()
 	})
 
-	test("valid submitted hexcode adds a color to the color array", () => {
-		render(<App onColorArrayChange={onColorArrayChangeMock} />)
-		const inputField = screen.getByTestId("color-input")
+	test("valid submitted hexcode adds a color to the color array and does not show error message", () => {
+		render(<App />)
+		const inputField = screen.getByRole("textbox")
 		const validHexColor = "1a2b3c"
 
 		fireEvent.change(inputField, { target: { value: validHexColor } })
-		fireEvent.submit(screen.getByTestId("add-color-component"))
+		fireEvent.submit(screen.getByRole("form"))
 
 		const array = screen.queryAllByTestId("color-item")
 		expect(array).toHaveLength(Color.length + 1)
+
+		const errorMessage = screen.queryByTestId("error-message")
+		expect(errorMessage).not.toBeInTheDocument()
 	})
 
 	test("valid submitted hexcode adds that color to the color array as 'My Color 1' and renders that color", () => {
-		render(<App onColorArrayChange={onColorArrayChangeMock} />)
-		const inputField = screen.getByTestId("color-input")
+		render(<App />)
+		const inputField = screen.getByRole("textbox")
 		const validHexColor = "1a2b3c"
 
 		fireEvent.change(inputField, { target: { value: validHexColor } })
-		fireEvent.submit(screen.getByTestId("add-color-component"))
+		fireEvent.submit(screen.getByRole("form"))
 
 		const colorBox = screen.getByTestId("color-box-My Color 1")
 		const colorId = screen.getByText("My Color 1")
