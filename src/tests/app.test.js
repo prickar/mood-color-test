@@ -29,7 +29,6 @@ describe("Renders all components, Header, ListItems, AddColor and Footer.", func
 })
 
 describe("Submitting a correct hexcode adds that color to the color array and renders that color, invalid hexcode shows error message.", () => {
-	// const onColorArrayChangeMock = jest.fn()
 
 	test("invalid submitted hexcode does not add a color to the color array and shows error message", () => {
 		render(<App />)
