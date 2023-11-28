@@ -23,7 +23,9 @@ npm test
  - ErrorMessage
  - Footer
  - Header
- - ListItem 
+ - ListItem
+
+ - In the constants directory there's a file with an array called Colors containing 5 objects set up as follows: {id: "NameName", title: "Name Name", color: "#FFFFFF"}.
 
  ## Feautures 
 
